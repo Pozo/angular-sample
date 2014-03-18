@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <script type="text/javascript" src="angular.js"></script>
+  <script type="text/javascript" src="angular-resource.js"></script>
+  <script type="text/javascript">
+  	var app = angular.module('app',[]);
+
+	app.controller('LoginController', ['$scope', function($scope) {
+		$scope.portfolios = ['1111','2222','3333'];
+		$scope.portfolios['1111'] = [
+			{name : '1000',value: '12,22'},
+			{name : '2000',value: '12,228'},
+			{name : '3000',value: '16,22'},
+			{name : '4000',value: '19,22'},
+			{name : '5000',value: '144,22'}
+		];
+		$scope.portfolios['2222'] = [
+			{name : '1000',value: '1,224'},
+			{name : '2000',value: '1,22'},
+			{name : '3000',value: '2,2212'},
+			{name : '4000',value: '12,22'},
+			{name : '5000',value: '9,22'},
+			{name : '6000',value: '12,22'},
+			{name : '7000',value: '12,22'},
+			{name : '8000',value: '66,22'},
+			{name : '9000',value: '12,22'},
+			{name : '10000',value: '12,22'}
+		];
+		$scope.portfolios['3333'] = [
+			{name : '1000',value: '99,22'},
+			{name : '2000',value: '12,22'},
+			{name : '3000',value: '10,22'},
+			{name : '4000',value: '12,22'},
+			{name : '5000',value: '33,222'},
+			{name : '6000',value: '12,22'},
+			{name : '7000',value: '14,22'},
+			{name : '8000',value: '12,22'},
+			{name : '9000',value: '16,22'},
+			{name : '10000',value: '22,22'},
+			{name : '11000',value: '12,22'},
+			{name : '12000',value: '234,22'},
+			{name : '13000',value: '12,22'},
+			{name : '14000',value: '12,22'},
+			{name : '15000',value: '12,22'}
+		];
+		
+		$scope.currentPortfolio;
+		
+		// here we change the current portfolio for userid if exists
+		$scope.$watch('userid', function(val,old){
+			if(undefined != val) {
+				if('1111' == val) {
+
+					$scope.currentPortfolio = $scope.portfolios['1111'];
+				} else if('2222' == val) {
+
+					$scope.currentPortfolio = $scope.portfolios['2222'];
+				} else if('3333' == val) {
+				
+					$scope.currentPortfolio = $scope.portfolios['3333'];
+				} else {
+				
+					$scope.currentPortfolio = null;
+				}				
+			}			
+		});
+
+	}]);
+  </script>
+  <meta charset="utf-8">
+
+  <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+  <style type="text/css">
+	body {
+		padding:0;
+		margin:0;
+		width: 100%;
+	}
+	#login-form {
+		padding: 10em;
+		width: 400px;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+	#user-login-button {
+		margin: 2em 0em 0em 13em;
+	}
+	#user-id {
+		float: right;
+	}
+	ul {
+		list-style-type: none;
+	}
+  </style>
+</head>
+
+<body>
+  <div id="login-form" ng-app="app" ng-controller="LoginController">
+    <div>
+		<span>User ID: </span>
+		<input id="user-id" ng-model="userid" type="text" />
+	
+	</div>
+	<br />
+	<span ng-model="currentPortfolio">Portfolio number : {{currentPortfolio.length}}</span>
+	<ul ng-model="currentPortfolio" ng-repeat="item in currentPortfolio">
+		<li>{{item.name}}, {{item.value}}</li>
+	</ul>
+  </div>
+</body>
+</html>
